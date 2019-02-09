@@ -10,11 +10,12 @@ class PhotoStore {
   @observable photos = [];
   @observable lastPhotoId = null;
   @observable count = 18;
+  @observable hasMore = false;
 
   @action.bound
-  async fetch() {
+  async fetch(lastId) {
     const { data } = await axios(`${API_URL}?${queryString({
-      lastPhotoId: this.lastPhotoId,
+      lastPhotoId: lastId,
       count: this.count,
     })}`);
 
@@ -26,9 +27,12 @@ class PhotoStore {
       count, emotion, lastPhotoId, photos,
     } = data;
 
+    const newPhotos = photos.filter(({ id }) => !this.photos.find(p => p.id === id));
+
     runInAction(() => {
       this.lastPhotoId = lastPhotoId;
-      this.photos = [...this.photos, ...photos];
+      this.photos = [...this.photos, ...newPhotos];
+      this.hasMore = photos.length % 18 === 0;
     });
   }
 }

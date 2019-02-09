@@ -5,7 +5,7 @@ const Wrapper = styled.header`
   color: #000;
   font-size: 24px;
   font-weight: bold;
-  font-family: 'Lato', sans-serif;
+  font-family: 'Roboto', sans-serif;
   width: 100%;
   height: 64px;
   text-align: center;
