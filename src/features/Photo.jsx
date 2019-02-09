@@ -16,13 +16,8 @@ export class Photo extends React.Component {
     const {
       active, facesFound, photoUrl, setActive, id,
     } = this.props;
-    const { visible } = this.state;
 
-    const visibleEmotions = visible ? Object.entries(facesFound[visible].emotion)
-      .map(([emotion, value]) => ({
-        emotion: emotion.toLowerCase(),
-        value,
-      })) : [];
+    const { visible } = this.state;
 
     return (
       <StyledPhoto
@@ -38,34 +33,34 @@ export class Photo extends React.Component {
                 <StyledSvg
                   key={i}
                   color={EMOTIONS[castEmotion.toLowerCase()].shadow}
-                  onMouseOver={() => this.setVisible(i)}
+                  onMouseOver={() => this.setVisible(true)}
+                  onMouseOut={() => facesFound.length > 5 && i > 2 && this.setVisible(false)}
                 >
                   {EMOTIONS[castEmotion.toLowerCase()].icon}
                 </StyledSvg>
               ))
             }
           </StyledEmotions>
-        </StyledImageWrapper>
-        {visible && (
-          <EmotionsList>
+          <EmotionsList
+            visible={visible}
+            onMouseOut={() => this.setVisible(false)}
+          >
             {
-              visibleEmotions.map(({ emotion, value}) => (
-                <div key={emotion}>
-                  {EMOTIONS[emotion].icon}
+              visible && facesFound.map(({ castEmotion, emotion, id }) => (
+                <div key={id}>
+                  {EMOTIONS[castEmotion.toLowerCase()].icon}
                   <span>
-                    {value}
+                    {emotion[castEmotion.toLowerCase()]}
                   </span>
                 </div>
               ))
             }
           </EmotionsList>
-        )}
+        </StyledImageWrapper>
       </StyledPhoto>
     );
   }
 }
-
-Photo.propTypes = PropTypes.shape(GalleryPhoto);
 
 const StyledPhoto = styled.div`
   position: relative;
@@ -115,6 +110,7 @@ const StyledSvg = styled.div`
   margin-left: 4px;
   padding: 8px;
   color: ${p => p.color};
+  cursor: pointer;
   
   svg {
     width: 100%;
@@ -131,19 +127,31 @@ const StyledEmotions = styled.div`
 `;
 
 const EmotionsList = styled.div`
-  width: 30%;
+  transition: all ease-in-out .3s;
+  width: ${p => (p.visible ? '40%' : '0px')};
   position: absolute;
-  right: 0;
-  top: 0;
-  left: 0;
+  right: -1px;
+  top: -1px;
+  bottom: 0;
+  border-radius: 0 8px 8px 0;
   background: #8C43FF;
   display: flex;
   flex-direction: column;
+  height: calc(100% + 1px);
+  justify-content: center;
+  padding: 4px ${p => (p.visible ? '8px' : '0px')};
   
   & > div {
     display: flex;
     align-items: center;
     color: white;
-    padding: 2px 8px;
+    padding: 4px 12px;
+  }
+  
+  svg {
+    width: 20px;
+    height: 20px;
+    fill: white;
+    margin-right: 4px;
   }
 `;

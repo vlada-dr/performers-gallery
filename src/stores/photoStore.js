@@ -24,8 +24,6 @@ class PhotoStore {
 
   @action.bound
   async fetch(emotion = null) {
-    return;
-
     if (emotion && this.emotion !== emotion) {
       this.emotion = emotion;
       this.lastPhotoId = null;

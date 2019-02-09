@@ -17,7 +17,7 @@ export function Button({ active, shadow, children, onClick, gradient, image }) {
 }
 
 Button.propTypes = {
-  children: PropTypes.string.isRequired,
+  children: PropTypes.any.isRequired,
 };
 
 const StyledWrapper = styled.div`

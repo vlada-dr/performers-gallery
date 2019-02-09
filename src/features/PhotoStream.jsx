@@ -2,20 +2,19 @@ import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import InfiniteScroll from 'react-infinite-scroller';
+import Fade from 'react-reveal/Fade';
 import { GalleryPhoto } from '../models';
 import { Loader } from '../ui';
 import { Photo } from './Photo';
 
-const chunk = (arr, size) =>
-  Array.from({ length: Math.ceil(arr.length / size) }, (v, i) =>
-    arr.slice(i * size, i * size + size)
-  );
+const chunk = (arr, size) => Array.from({
+  length: Math.ceil(arr.length / size),
+}, (v, i) => arr.slice(i * size, i * size + size));
 
 export class PhotoStream extends React.Component {
   static propTypes = {
     fetchPhotos: PropTypes.func.isRequired,
     hasMore: PropTypes.bool.isRequired,
-    lastPhotoId: PropTypes.number.isRequired,
     photos: PropTypes.arrayOf(PropTypes.shape(GalleryPhoto)),
   };
 
@@ -47,16 +46,18 @@ export class PhotoStream extends React.Component {
           <StyledWrapper>
             {chunk(photos, 3).map((row, i) => (
               <StyledBlockWrapper key={i}>
-                <StyledRow>
-                  {row.map(p => (
-                    <Photo
-                      key={p.id}
-                      active={p.id === active}
-                      setActive={this.setActive}
-                      {...p}
-                    />
-                  ))}
-                </StyledRow>
+                <Fade bottom cascade>
+                  <StyledRow>
+                    {row.map(p => (
+                      <Photo
+                        key={p.id}
+                        active={p.id === active}
+                        setActive={this.setActive}
+                        {...p}
+                      />
+                    ))}
+                  </StyledRow>
+                </Fade>
               </StyledBlockWrapper>
             ))}
           </StyledWrapper>

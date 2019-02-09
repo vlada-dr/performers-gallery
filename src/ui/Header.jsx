@@ -5,7 +5,6 @@ import { media } from './media';
 const Wrapper = styled.header`
   color: #fff;
   font-size: 32px;
-  font-weight: bold;
   font-family: 'Roboto', sans-serif;
   width: 100%;
   text-align: center;

@@ -13,18 +13,19 @@ export function Filters({ selectEmotion, selected }) {
   return (
     <StyledWrapper>
       {
-        chunk(Object.entries(EMOTIONS), 4).map(row => (
-          <div>
+        chunk(Object.entries(EMOTIONS), 4).map((row, i) => (
+          <div key={i}>
             {row.map(([emotion, data]) => (
-          <Button
-            {...data}
-            active={selected === emotion}
-            onClick={() => selectEmotion(emotion)}
-          >
-            {emotion}
-            {data.icon}
-          </Button>
-        ))}
+              <Button
+                {...data}
+                active={selected === emotion}
+                key={emotion}
+                onClick={() => selectEmotion(emotion)}
+              >
+                {emotion}
+                {data.icon}
+              </Button>
+            ))}
           </div>
         ))
       }
