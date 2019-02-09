@@ -1,11 +1,18 @@
 import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
+import { toJS } from 'mobx';
 import InfiniteScroll from 'react-infinite-scroller';
 import { GalleryPhoto } from '../models';
 import { Loader } from '../ui';
-import { EMOTIONS } from '../Emotions';
 import { Photo } from './Photo';
+import { media } from '../ui/media';
+import { ActivePhoto } from './ActivePhoto';
+
+const chunk = (arr, size) =>
+  Array.from({ length: Math.ceil(arr.length / size) }, (v, i) =>
+    arr.slice(i * size, i * size + size)
+  );
 
 export class PhotoStream extends React.Component {
   static propTypes = {
@@ -19,10 +26,18 @@ export class PhotoStream extends React.Component {
     photos: [],
   };
 
+  state = {
+    active: null,
+  };
+
+  setActive = active => this.setState({ active });
+
   render() {
     const {
       photos, hasMore, fetchPhotos,
     } = this.props;
+
+    const { active } = this.state;
 
     return (
       <>
@@ -33,7 +48,27 @@ export class PhotoStream extends React.Component {
           loader={<Loader />}
         >
           <StyledWrapper>
-            {photos.map(p => <Photo key={p.id} {...p} />)}
+            {chunk(photos, 3).map((row, i) => (
+              <StyledBlockWrapper key={i}>
+                <StyledRow>
+                  {row.map(p => (
+                    <Photo
+                      key={p.id}
+                      active={p.id === active}
+                      setActive={this.setActive}
+                      {...p}
+                    />
+                  ))}
+                </StyledRow>
+                {
+                  row.find(photo => photo.id === active) && (
+                    <ActivePhoto
+                      facesFound={toJS(row.find(photo => photo.id === active).facesFound)}
+                    />
+                  )
+                }
+              </StyledBlockWrapper>
+            ))}
           </StyledWrapper>
         </InfiniteScroll>
       </>
@@ -42,17 +77,27 @@ export class PhotoStream extends React.Component {
 }
 
 const StyledWrapper = styled.div`
-  width: 932px;
+  max-width: 100vw;
   display: flex;
   flex-wrap: wrap;
   margin: auto;
-
-  & > * {
-    margin-bottom: 16px;
-    
-    &:not(:nth-child(3n)) {
-      margin-right: 16px;
-    }
-  }
+  
+  ${media.tab`
+    max-width: 782px;
+  `}
+  
+  ${media.desktop`
+    max-width: 932px;
+  `}
 `;
 
+const StyledRow = styled.div`
+  width: 100%;
+  display: flex;
+  
+  margin-bottom: 8px;
+`;
+
+const StyledBlockWrapper = styled.div`
+  width: 100%;
+`;

@@ -1,10 +1,20 @@
+import React from 'react';
 import styled from 'styled-components';
-import LoaderImage from './LoaderImage.svg';
+import { LoaderIcon } from './icons';
 
-export const Loader = styled.div`
-  background: url('${LoaderImage}') no-repeat;
+export const Loader = () => (
+  <Wrapper>
+    <LoaderIcon />
+  </Wrapper>
+);
+
+const Wrapper = styled.div`
   margin: auto;
   height: 40px;
   padding: 40px;
   background-position: center;
+  
+  svg {
+    height: 100%;
+  }
 `;

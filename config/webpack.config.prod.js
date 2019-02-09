@@ -129,7 +129,7 @@ module.exports = {
       },
       { test: /\.html$/, use: 'html-loader' },
       {
-        test: /\.(ico|jpg|svg|png)$/,
+        test: /\.(ico|jpg|png)$/,
         use: {
           loader: 'file-loader',
           options: {
@@ -137,6 +137,20 @@ module.exports = {
             name: 'static/media/[name].[hash:8].[ext]'
           }
         }
+      },
+      {
+        test: /\.svg$/,
+        use: [
+          {
+            loader: "babel-loader"
+          },
+          {
+            loader: "react-svg-loader",
+            options: {
+              jsx: true // true outputs JSX tags
+            }
+          }
+        ]
       },
       {
         test: /\.(|eot|ttf|woff)$/,

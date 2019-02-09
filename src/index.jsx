@@ -1,7 +1,11 @@
 import * as React from 'react';
 import { render } from 'react-dom';
 import { AppContainer } from 'react-hot-loader';
+import { injectGlobal } from 'styled-components';
 import App from './App';
+import { globalStyles } from './ui/theme';
+
+injectGlobal`${globalStyles}`;
 
 render(
   <AppContainer>

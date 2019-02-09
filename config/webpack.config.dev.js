@@ -64,7 +64,21 @@ module.exports = {
         ]
       },
       { test: /\.html$/, use: 'html-loader' },
-      { test: /\.(ico|jpg|svg|png)$/, use: 'file-loader' },
+      { test: /\.(ico|jpg|png)$/, use: 'file-loader' },
+      {
+        test: /\.svg$/,
+        use: [
+          {
+            loader: "babel-loader"
+          },
+          {
+            loader: "react-svg-loader",
+            options: {
+              jsx: true // true outputs JSX tags
+            }
+          }
+        ]
+      },
       {
         test: /\.(|eot|ttf|woff)$/,
         use: {

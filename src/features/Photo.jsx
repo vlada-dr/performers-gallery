@@ -1,22 +1,33 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { EMOTIONS } from '../Emotions';
 import { GalleryPhoto } from '../models';
+import { media } from '../ui/media';
 
-export function Photo({ facesFound, photoUrl, id }) {
+export function Photo({ active, facesFound, photoUrl, setActive, id }) {
+  const key = facesFound.length ? '' : 'Faces not found';
+  const value = facesFound.length || '';
+
   return (
-    <StyledPhoto>
-      <StyledEmotions>
+    <StyledPhoto
+      active={active}
+      onClick={() => facesFound.length && setActive(id)}
+      width={100 / 3}
+    >
+      <StyledImageWrapper>
+        <img src={photoUrl} key={id} />
+      </StyledImageWrapper>
+      <StyledInfo>
+        <StyledKey>{key}</StyledKey>
         {
           facesFound.map(({ castEmotion }) => (
-            <StyledEmotion>
-              {EMOTIONS[castEmotion.toLowerCase()].emoji}
-            </StyledEmotion>
+            <StyledSvg>
+              {EMOTIONS[castEmotion.toLowerCase()].icon}
+            </StyledSvg>
           ))
         }
-      </StyledEmotions>
-      <img src={photoUrl} key={id} />
+      </StyledInfo>
     </StyledPhoto>
   );
 }
@@ -24,44 +35,59 @@ export function Photo({ facesFound, photoUrl, id }) {
 Photo.propTypes = PropTypes.shape(GalleryPhoto);
 
 const StyledPhoto = styled.div`
-  width: 100vw;
-  height: 100vw;
-  display: inline-block;
   position: relative;
+  display: inline-flex;
+  flex-direction: column;
+  
+  width: calc(${p => p.width}% - 16px);
+  height: auto;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid #d7d7d7;
+  margin-bottom: 2px;
+  
+  ${p => p.active && css`
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.15);
+  `}
+  
+  &:not(:last-child) {
+    margin-right: 8px;
+  }
+`;
 
+const StyledImageWrapper = styled.div`
+  height: 200px;
+  width: 100%;
+  display: flex;
+ 
+  ${media.pho`
+    height: 145px;
+  `}
+  
   img {
     object-fit: cover;
     width: 100%;
     height: 100%;
   }
-  
-  @media only screen and (min-width: 800px) {
-    width: 250px;
-    height: 250px;
-  }
-  
-  @media only screen and (min-width: 1000px) {
-    width: 300px;
-    height: 300px;
-  }
 `;
 
-const StyledEmotions = styled.div`
-  display: flex;
-  position: absolute;
-  right: 8px;
-  top: 8px;
-`;
-
-const StyledEmotion = styled.div`
-  border-radius: 50%;
-  padding-left: 2px;
-  background: #fff;
-  width: 30px;
+const StyledKey = styled.div`
+  display: inline-flex;
+  margin: 0 8px;
+  color: #9e9e9e;
   height: 30px;
-  margin-left: 2px;
-  
+  align-items: center;
+`;
+
+const StyledInfo = styled.div`
+  padding: 16px 8px;
   display: flex;
   align-items: center;
-  justify-content: center;
+`;
+
+const StyledSvg = styled.div`
+  svg {
+    width: 30px;
+    height: 30px;
+  }
 `;
