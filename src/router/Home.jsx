@@ -4,18 +4,18 @@ import { inject, observer } from 'mobx-react';
 import { Header } from '../ui';
 import { PhotoStream } from '../features/PhotoStream';
 import { Filters } from '../features/Filters';
-import Headroom from 'react-headroom-extended';
 
 const Home = ({ photoStore }) => {
   return (
     <>
-      <Headroom>
-        <Header title="Performers Gallery" />
-        <Filters
-          selectEmotion={photoStore.fetch}
-          selected={photoStore.emotion}
-        />
-      </Headroom>
+    <RelativeWrapper>
+      <Header title="Performers Gallery" />
+      <Filters
+        selectEmotion={photoStore.fetch}
+        selected={photoStore.emotion}
+      />
+      <HeaderBackground />
+    </RelativeWrapper>
       <PhotoStream
         fetchPhotos={photoStore.fetch}
         hasMore={photoStore.hasMore}
@@ -28,11 +28,18 @@ const Home = ({ photoStore }) => {
 
 export default inject('photoStore')(observer(Home));
 
-const FixedContent = styled.div`
-  background: white;
+const HeaderBackground = styled.div`
+  position: absolute;
+  top: 0;
   left: 0;
   right: 0;
-  top: 0;
-  position: fixed;
-  z-index: 1;
+  background: #8C43FF;
+  height: calc(100% + 100px);
+  z-index: -1;
+`;
+
+const RelativeWrapper = styled.div`
+  position: relative;
+  z-index: 0;
+  height: auto;
 `;

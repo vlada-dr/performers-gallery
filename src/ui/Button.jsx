@@ -22,23 +22,20 @@ Button.propTypes = {
 
 const StyledWrapper = styled.div`
   cursor: pointer;
-  flex: 1 1 auto;
-  margin: 10px;
-  width: 200px;
-  padding: 4px 20px;
+  margin: 6px;
+  padding: 6px 20px;
   text-align: center;
   text-transform: uppercase;
   transition: 0.5s;
   background-size: 200% auto;
   color: white;
-  box-shadow: 0 0 20px #eee;
   border-radius: 10px;
   background-image: linear-gradient(${p => p.gradient});
   
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  font: 20px 'Roboto';
+  font: 16px 'Roboto';
   
   ${p => p.active && css`
      box-shadow: 0 4px 15px 0 ${p.shadow};
@@ -49,8 +46,8 @@ const StyledWrapper = styled.div`
   }
   
   svg {
-    width: 50px;
-    height: 50px;
+    width: 30px;
+    height: 30px;
     margin-left: 4px;
     object-fit: contain;
     

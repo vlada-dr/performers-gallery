@@ -15,7 +15,7 @@ export const EMOTIONS = {
   },
   disgust: {
     emoji: '😟',
-    gradient: 'to right, #F0F2F0 0%, #000C40 51%, #F0F2F0 100%',
+    gradient: 'to right, #1D2B64 0%, #F8CDDA 51%, #1D2B64 100%',
     image: 'https://s.tcdn.co/c2b/583/c2b583cc-71f2-3f42-935b-9a9c7ac16fc5/17.png',
     shadow: 'rgba(126, 52, 161, 0.75)',
     icon: <DisgustIcon />,
@@ -31,8 +31,8 @@ export const EMOTIONS = {
     emoji: '😌️',
     gradient: 'to right, #f6d365 0%, #fda085 51%, #f6d365 100%',
     image: 'https://s.tcdn.co/c2b/583/c2b583cc-71f2-3f42-935b-9a9c7ac16fc5/2.png',
-    shadow: 'rgba(65, 132, 234, 0.75)',
     icon: <HappinessIcon />,
+    shadow: 'rgba(252, 104, 110, 0.75)',
   },
   neutral: {
     emoji: '😐',
@@ -45,7 +45,7 @@ export const EMOTIONS = {
     emoji: '😔',
     gradient: 'to right, #a1c4fd 0%, #c2e9fb 51%, #a1c4fd 100%',
     image: 'https://s.tcdn.co/c2b/583/c2b583cc-71f2-3f42-935b-9a9c7ac16fc5/9.png',
-    shadow: 'rgba(252, 104, 110, 0.75)',
+    shadow: 'rgba(65, 132, 234, 0.75)',
     icon: <SadIcon />,
   },
   surprise: {

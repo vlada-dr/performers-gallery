@@ -3,15 +3,15 @@ import styled from 'styled-components';
 import { media } from './media';
 
 const Wrapper = styled.header`
-  color: #000;
+  color: #fff;
   font-size: 32px;
   font-weight: bold;
   font-family: 'Roboto', sans-serif;
   width: 100%;
   text-align: center;
   line-height: 64px;
-  letter-spacing: 1px;
-  padding-top: 16px;
+  letter-spacing: 2px;
+  padding: 50px 0 10px;
   
   ${media.pho`
     font-size: 18px;

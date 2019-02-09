@@ -1,6 +1,6 @@
 import React from 'react';
 import { Route, Router, Switch } from 'react-router';
-import Home from '../pages/Home';
+import Home from './Home';
 
 const router = ({ history }) => (
   <Router history={history}>

@@ -4,11 +4,18 @@ import { Button } from '../ui';
 import { EMOTIONS } from '../Emotions';
 import { media } from '../ui/media';
 
+const chunk = (arr, size) =>
+  Array.from({ length: Math.ceil(arr.length / size) }, (v, i) =>
+    arr.slice(i * size, i * size + size)
+  );
+
 export function Filters({ selectEmotion, selected }) {
   return (
     <StyledWrapper>
       {
-        Object.entries(EMOTIONS).map(([emotion, data]) => (
+        chunk(Object.entries(EMOTIONS), 4).map(row => (
+          <div>
+            {row.map(([emotion, data]) => (
           <Button
             {...data}
             active={selected === emotion}
@@ -17,6 +24,8 @@ export function Filters({ selectEmotion, selected }) {
             {emotion}
             {data.icon}
           </Button>
+        ))}
+          </div>
         ))
       }
     </StyledWrapper>
@@ -26,7 +35,12 @@ export function Filters({ selectEmotion, selected }) {
 const StyledWrapper = styled.div`
   max-width: 1200px;
   margin: auto;
+  
+  padding-bottom: 60px;
+  
+  & > div {
   display: flex;
   flex-wrap: wrap;
-  padding-bottom: 16px;
+  justify-content: center;
+  }
 `;

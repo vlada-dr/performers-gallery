@@ -1,13 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import { toJS } from 'mobx';
 import InfiniteScroll from 'react-infinite-scroller';
 import { GalleryPhoto } from '../models';
 import { Loader } from '../ui';
 import { Photo } from './Photo';
-import { media } from '../ui/media';
-import { ActivePhoto } from './ActivePhoto';
 
 const chunk = (arr, size) =>
   Array.from({ length: Math.ceil(arr.length / size) }, (v, i) =>
@@ -60,13 +57,6 @@ export class PhotoStream extends React.Component {
                     />
                   ))}
                 </StyledRow>
-                {
-                  row.find(photo => photo.id === active) && (
-                    <ActivePhoto
-                      facesFound={toJS(row.find(photo => photo.id === active).facesFound)}
-                    />
-                  )
-                }
               </StyledBlockWrapper>
             ))}
           </StyledWrapper>
@@ -77,25 +67,18 @@ export class PhotoStream extends React.Component {
 }
 
 const StyledWrapper = styled.div`
-  max-width: 100vw;
+  max-width: 70vw;
   display: flex;
   flex-wrap: wrap;
   margin: auto;
-  
-  ${media.tab`
-    max-width: 782px;
-  `}
-  
-  ${media.desktop`
-    max-width: 932px;
-  `}
+  z-index: 1;
 `;
 
 const StyledRow = styled.div`
   width: 100%;
   display: flex;
   
-  margin-bottom: 8px;
+  margin-bottom: 32px;
 `;
 
 const StyledBlockWrapper = styled.div`
