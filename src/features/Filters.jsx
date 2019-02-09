@@ -1,46 +1,30 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Button } from '../ui';
+import { EMOTIONS } from '../Emotions';
 
-const BUTTONS = {
-  anger: {
-    emoji: '😠',
-  },
-  disgust: {
-    emoji: '😟',
-  },
-  fear: {
-    emoji: '😨',
-  },
-  happiness: {
-    emoji: '😌️',
-  },
-  neutral: {
-    emoji: '😐',
-  },
-  sadness: {
-    emoji: '😔',
-  },
-  surprise: {
-    emoji: '😱',
-  },
-};
-
-export function Filters({
-}) {
+export function Filters({ selectEmotion }) {
   return (
-    <div>
+    <StyledWrapper>
       {
-        Object.entries(BUTTONS).map(([emotion, data]) => (
-          <Button emoji={data.emoji}>
+        Object.entries(EMOTIONS).map(([emotion, data]) => (
+          <Button
+            gradient={data.gradient}
+            emoji={data.emoji}
+            onClick={() => selectEmotion(emotion)}
+          >
             {emotion}
           </Button>
         ))
       }
-    </div>
+    </StyledWrapper>
   );
 }
 
-Filters.propTypes = {
-};
+const StyledWrapper = styled.div`
+  max-width: 900px;
+  margin: auto;
+  display: flex;
+  flex-wrap: wrap;
+  padding-bottom: 16px;
+`;

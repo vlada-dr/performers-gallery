@@ -8,7 +8,10 @@ const Home = ({ photoStore }) => {
   return (
     <>
       <Header title="Performers Gallery" />
-      <Filters />
+      <Filters
+        lastPhotoId={photoStore.lastPhotoId}
+        selectEmotion={photoStore.fetch}
+      />
       <PhotoStream
         fetchPhotos={photoStore.fetch}
         hasMore={photoStore.hasMore}

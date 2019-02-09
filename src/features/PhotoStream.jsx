@@ -3,6 +3,9 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import InfiniteScroll from 'react-infinite-scroller';
 import { GalleryPhoto } from '../models';
+import { Loader } from '../ui';
+import { EMOTIONS } from '../Emotions';
+import { Photo } from './Photo';
 
 export class PhotoStream extends React.Component {
   static propTypes = {
@@ -16,31 +19,21 @@ export class PhotoStream extends React.Component {
     photos: [],
   };
 
-  componentDidMount() {
-    const { fetchPhotos, lastPhotoId } = this.props;
-
-    fetchPhotos(lastPhotoId);
-  }
-
   render() {
     const {
-      photos, lastPhotoId, hasMore, fetchPhotos,
+      photos, hasMore, fetchPhotos,
     } = this.props;
 
     return (
       <>
         <InfiniteScroll
-          loadMore={() => fetchPhotos(lastPhotoId)}
+          loadMore={() => fetchPhotos()}
           hasMore={hasMore}
           useWindow={false}
-          loader={<div className="loader" key={0}>Loading ...</div>}
+          loader={<Loader />}
         >
           <StyledWrapper>
-            {photos.map(p => (
-              <StyledPhoto>
-                <img src={p.photoUrl} key={p.id} />
-              </StyledPhoto>
-            ))}
+            {photos.map(p => <Photo key={p.id} {...p} />)}
           </StyledWrapper>
         </InfiniteScroll>
       </>
@@ -55,21 +48,11 @@ const StyledWrapper = styled.div`
   margin: auto;
 
   & > * {
-  margin-bottom: 16px;
+    margin-bottom: 16px;
+    
     &:not(:nth-child(3n)) {
       margin-right: 16px;
     }
   }
 `;
 
-const StyledPhoto = styled.div`
-  width: 300px;
-  height: 300px;
-  display: inline-block;
-
-  img {
-    object-fit: cover;
-    width: 100%;
-    height: 100%;
-  }
-`;

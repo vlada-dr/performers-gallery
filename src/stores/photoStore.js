@@ -2,30 +2,45 @@ import { observable, action, runInAction } from 'mobx';
 import axios from 'axios';
 
 const API_URL = 'http://performersgallery.azurewebsites.net/api/photos';
+
 const queryString = params => Object.keys(params)
   .map(key => (params[key] ? `${key}=${params[key]}` : ''))
   .join('&');
+
+const capitalizeFirstLetter = (string) => {
+  if (!string) {
+    return null;
+  }
+
+  return string.charAt(0).toUpperCase() + string.slice(1);
+};
 
 class PhotoStore {
   @observable photos = [];
   @observable lastPhotoId = null;
   @observable count = 18;
-  @observable hasMore = false;
+  @observable hasMore = true;
+  @observable emotion = null;
 
   @action.bound
-  async fetch(lastId) {
+  async fetch(emotion = null) {
+    if (emotion && this.emotion !== emotion) {
+      this.emotion = emotion;
+      this.lastPhotoId = null;
+      this.photos = [];
+    }
+
     const { data } = await axios(`${API_URL}?${queryString({
-      lastPhotoId: lastId,
+      lastPhotoId: this.lastPhotoId,
       count: this.count,
+      emotion: capitalizeFirstLetter(this.emotion),
     })}`);
 
     if (!data) {
       return;
     }
 
-    const {
-      count, emotion, lastPhotoId, photos,
-    } = data;
+    const { lastPhotoId, photos } = data;
 
     const newPhotos = photos.filter(({ id }) => !this.photos.find(p => p.id === id));
 

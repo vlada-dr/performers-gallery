@@ -3,13 +3,14 @@ import styled from 'styled-components';
 
 const Wrapper = styled.header`
   color: #000;
-  font-size: 24px;
+  font-size: 32px;
   font-weight: bold;
   font-family: 'Roboto', sans-serif;
   width: 100%;
-  height: 64px;
   text-align: center;
   line-height: 64px;
+  letter-spacing: 1px;
+  padding-top: 16px;
 `;
 
 export const Header = ({ title }) => (
