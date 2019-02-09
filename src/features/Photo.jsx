@@ -139,4 +139,11 @@ const EmotionsList = styled.div`
   background: #8C43FF;
   display: flex;
   flex-direction: column;
+  
+  & > div {
+    display: flex;
+    align-items: center;
+    color: white;
+    padding: 2px 8px;
+  }
 `;
