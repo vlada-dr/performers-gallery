@@ -1,8 +1,6 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 import { EMOTIONS } from '../Emotions';
-import { GalleryPhoto } from '../models';
 import { media } from '../ui/media';
 
 export class Photo extends React.Component {

@@ -1,13 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
+import chunk from 'lodash/chunk';
 import { Button } from '../ui';
 import { EMOTIONS } from '../Emotions';
-import { media } from '../ui/media';
-
-const chunk = (arr, size) =>
-  Array.from({ length: Math.ceil(arr.length / size) }, (v, i) =>
-    arr.slice(i * size, i * size + size)
-  );
 
 export function Filters({ selectEmotion, selected }) {
   return (

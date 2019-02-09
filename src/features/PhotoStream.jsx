@@ -3,13 +3,10 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import InfiniteScroll from 'react-infinite-scroller';
 import Fade from 'react-reveal/Fade';
+import chunk from 'lodash/chunk';
 import { GalleryPhoto } from '../models';
 import { Loader } from '../ui';
 import { Photo } from './Photo';
-
-const chunk = (arr, size) => Array.from({
-  length: Math.ceil(arr.length / size),
-}, (v, i) => arr.slice(i * size, i * size + size));
 
 export class PhotoStream extends React.Component {
   static propTypes = {
