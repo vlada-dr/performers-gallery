@@ -32,9 +32,9 @@ export default inject('photoStore')(observer(Home));
 
 const StyledHomeHeader = styled(HomeHeader)`
   position:fixed;
-  width: 105%;
-  left: -5%;
-  bottom: calc(50% - 2px);
+  width: 150%;
+  left: -10%;
+  bottom: calc(40% - 2px);
 `;
 
 const HeaderBackground = styled.div`
@@ -42,9 +42,9 @@ const HeaderBackground = styled.div`
   top: 0;
   left: 0;
   right: 0;
-  height: 50%;
+  height: 60%;
   z-index: -1;
-  background: linear-gradient(60deg,#a117e6 0,#17b9e6 100%) no-repeat scroll center center/cover;
+  background: linear-gradient(60deg, #8f00d6 0, #17b9e6 100%) no-repeat scroll center center/cover;
 `;
 
 

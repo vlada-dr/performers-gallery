@@ -23,18 +23,10 @@ export class PhotoStream extends React.Component {
     photos: [],
   };
 
-  state = {
-    active: null,
-  };
-
-  setActive = active => this.setState({ active });
-
   render() {
     const {
       photos, hasMore, fetchPhotos,
     } = this.props;
-
-    const { active } = this.state;
 
     return (
       <>
@@ -47,19 +39,15 @@ export class PhotoStream extends React.Component {
           <StyledWrapper>
             {chunk(photos, cardsInRow).map((row, i) => (
               <StyledBlockWrapper key={i}>
-                <Fade bottom cascade>
                   <StyledRow key={`stream-row-${i}`}>
                     {row.map(p => (
                       <Photo
                         key={p.id}
-                        active={p.id === active}
-                        setActive={this.setActive}
                         cardsInRow={cardsInRow}
                         {...p}
                       />
                     ))}
                   </StyledRow>
-                </Fade>
               </StyledBlockWrapper>
             ))}
           </StyledWrapper>

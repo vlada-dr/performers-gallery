@@ -1,2 +1,5 @@
-
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2000 600" preserveAspectRatio="none">\a         <path fill="#ffffff" opacity="0.1" d="M499.06982,477.55a102.85806,102.85806,0,0,1-97.6499-31.73L0,0V600.86H2000V158.52Z"/>\a         <path fill="#ffffff" opacity="0.1" d="M481.81982,528.39a102.84227,102.84227,0,0,1-96.48-35.12L0,34.04V600.86H2000v-340.17Z"/>\a         <path fill="#ffffff" d="M2000,361.51V600.86H0V65.1L370.0498,538.74a102.8,102.8,0,0,0,95.19043,38.46Z"/>\a       </svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2000 600" preserveAspectRatio="none">\a
+    <path fill="#ffffff" opacity="0.1" d="M499.06982,477.55a102.85806,102.85806,0,0,1-97.6499-31.73L0,0V600.86H2000V158.52Z"/>\a
+    <path fill="#ffffff" opacity="0.1" d="M481.81982,528.39a102.84227,102.84227,0,0,1-96.48-35.12L0,34.04V600.86H2000v-340.17Z"/>\a
+    <path fill="#ffffff" d="M2000,361.51V600.86H0V65.1L370.0498,538.74a102.8,102.8,0,0,0,95.19043,38.46Z"/>\a
+</svg>

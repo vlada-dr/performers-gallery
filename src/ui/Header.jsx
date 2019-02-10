@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 const Wrapper = styled.header`
   color: #fff;
-  font-size: 48px;
+  font-size: 3em;
   font-family: 'Lobster', cursive;
   width: 100%;
   text-align: center;

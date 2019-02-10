@@ -12,7 +12,7 @@ export class Photo extends React.Component {
 
   render() {
     const {
-      active, facesFound, photoUrl, setActive, id, cardsInRow,
+      facesFound, photoUrl, id, cardsInRow,
     } = this.props;
 
     const { visible } = this.state;
@@ -24,10 +24,8 @@ export class Photo extends React.Component {
 
     return (
       <StyledPhoto
-        active={active}
-        onClick={() => facesFound.length && setActive(id)}
         width={100 / cardsInRow}
-        onMouseOver={() => this.setVisible(true)}
+        onMouseOver={() => facesFound.length && this.setVisible(true)}
         onMouseOut={() => this.setVisible(false)}
       >
         <StyledImageWrapper filter={visible}>
@@ -51,7 +49,7 @@ export class Photo extends React.Component {
               visible && castEmotions.map(({ icon, value }) => (
                 <div key={id}>
                   {icon}
-                    {value}%
+                  {value}%
                 </div>
               ))
             }

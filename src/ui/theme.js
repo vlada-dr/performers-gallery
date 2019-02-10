@@ -1,3 +1,5 @@
+import { media } from './media';
+
 const css = String.raw;
 
 export const globalStyles = css`
@@ -11,6 +13,17 @@ export const globalStyles = css`
     background-color: #fff;
     background-attachment: fixed;
     color: #333;
+    
+    @media (-webkit-min-device-pixel-ratio: 2), 
+    (min-resolution: 192dpi) { 
+      ${media.tab`
+        font-size: 32px;
+      `}
+    }
+    
+    ${media.pho`
+      font-size: 32px;
+    `}
   }
  
   a {
