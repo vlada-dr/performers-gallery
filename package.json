@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Photo gallery with Mobx, React and Styled components.",
   "author": "Vlada Doroshenko",
+  "homepage": "https://vlada-dr.github.io/performers-gallery/",
   "repository": {
     "type": "git",
     "url": "https://github.com/vlada-dr/performers-gallery"
@@ -17,10 +18,12 @@
     "bld": "sh -ac '. ./.env.${REACT_APP_BUILD_MODE}; node ./config/scripts/build.js'",
     "build": "REACT_APP_BUILD_MODE=development yarn run bld",
     "staging": "REACT_APP_BUILD_MODE=staging yarn run bld",
-    "production": "REACT_APP_BUILD_MODE=production yarn run bld"
+    "production": "REACT_APP_BUILD_MODE=production yarn run bld",
+    "deploy": "gh-pages -d build"
   },
   "dependencies": {
     "axios": "^0.18.0",
+    "gh-pages": "^2.0.1",
     "history": "^4.7.2",
     "lodash": "^4.17.10",
     "mobx": "^5.1.1",

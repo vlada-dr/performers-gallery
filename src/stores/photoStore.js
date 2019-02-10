@@ -1,11 +1,12 @@
 import { observable, action, runInAction } from 'mobx';
 import axios from 'axios';
 
-const API_URL = 'http://performersgallery.azurewebsites.net/api/photos';
+const API_URL = 'https://performersgallery.azurewebsites.net/api/photos';
 
 const queryString = params => Object.keys(params)
-  .map(key => (params[key] ? `${key}=${params[key]}` : ''))
-  .join('&');
+  .map(key => (params[key] ? `${key}=${params[key]}&` : ''))
+  .join('')
+  .slice(0, -1);
 
 const capitalizeFirstLetter = (string) => {
   if (!string) {
