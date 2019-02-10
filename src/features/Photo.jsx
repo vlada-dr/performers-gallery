@@ -124,9 +124,9 @@ const StyledSvg = styled.div`
   background: #fff;
   background-size: 200%;
   border-radius: 50%;
-  width: 40px;
-  height: 40px;
-  margin-left: 4px;
+  width: 2.5em;
+  height: 2.5em;
+  margin-left: 0.25em;
   padding: 8px;
   color: ${p => p.color};
   cursor: pointer;
@@ -175,8 +175,8 @@ const EmotionsList = styled.div`
   }
   
   svg {
-    width: 30px;
-    height: 30px;
+    width: 2em;
+    height: 2em;
     fill: white;
     margin-right: 4px;
   }

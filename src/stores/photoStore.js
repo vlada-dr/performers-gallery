@@ -31,10 +31,12 @@ class PhotoStore {
       this.photos = [];
     }
 
+    const parsedEmotion = emotion === 'No filters' ? null : capitalizeFirstLetter(this.emotion);
+
     const { data } = await axios(`${API_URL}?${queryString({
       lastPhotoId: this.lastPhotoId,
       count: this.count,
-      emotion: capitalizeFirstLetter(this.emotion),
+      emotion: parsedEmotion,
     })}`);
 
     if (!data) {

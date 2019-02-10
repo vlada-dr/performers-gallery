@@ -9,7 +9,7 @@ const Wrapper = styled.header`
   text-align: center;
   line-height: 64px;
   letter-spacing: 1px;
-  padding: 50px 0 10px;
+  padding: 2em 0 0.5em;
 `;
 
 export const Header = ({ title }) => (

@@ -9,15 +9,15 @@ import { HomeHeader } from '../ui/icons';
 const Home = ({ photoStore }) => {
   return (
     <>
-    <RelativeWrapper>
-      <Header title="Performers Gallery" />
-      <Filters
-        selectEmotion={photoStore.fetch}
-        selected={photoStore.emotion}
-      />
-      <HeaderBackground />
-      <StyledHomeHeader />
-    </RelativeWrapper>
+      <RelativeWrapper>
+        <Header title="Performers Gallery" />
+        <Filters
+          selectEmotion={photoStore.fetch}
+          selected={photoStore.emotion}
+        />
+        <HeaderBackground />
+        <StyledHomeHeader />
+      </RelativeWrapper>
       <PhotoStream
         fetchPhotos={photoStore.fetch}
         hasMore={photoStore.hasMore}
@@ -35,6 +35,7 @@ const StyledHomeHeader = styled(HomeHeader)`
   width: 150%;
   left: -10%;
   bottom: calc(40% - 2px);
+  z-index: -1;
 `;
 
 const HeaderBackground = styled.div`
@@ -46,7 +47,6 @@ const HeaderBackground = styled.div`
   z-index: -1;
   background: linear-gradient(60deg, #8f00d6 0, #17b9e6 100%) no-repeat scroll center center/cover;
 `;
-
 
 const RelativeWrapper = styled.div`
   position: relative;

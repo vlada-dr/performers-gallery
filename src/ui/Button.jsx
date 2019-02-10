@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 import { media } from './media';
 
-export function Button({ active, shadow, children, onClick, gradient, image }) {
+export function Button({ active, shadow, children, onClick, gradient }) {
   return (
     <StyledWrapper
       gradient={gradient}
@@ -22,8 +22,8 @@ Button.propTypes = {
 
 const StyledWrapper = styled.div`
   cursor: pointer;
-  margin: 6px;
-  padding: 6px 20px;
+  margin: 0.5em;
+  padding: 0.5em 1.5em;
   text-align: center;
   text-transform: uppercase;
   transition: 0.5s;
@@ -31,11 +31,12 @@ const StyledWrapper = styled.div`
   color: white;
   border-radius: 10px;
   background-image: linear-gradient(${p => p.gradient});
+  box-shadow: 0 8px 24px 0 rgba(0,0,0,.11);
   
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  font: 16px 'Roboto';
+  font: 1em 'Roboto';
   
   ${p => p.active && css`
      box-shadow: 0 4px 15px 0 ${p.shadow};
@@ -46,8 +47,8 @@ const StyledWrapper = styled.div`
   }
   
   svg {
-    width: 30px;
-    height: 30px;
+    width: 2em;
+    height: 2em;
     margin-left: 4px;
     object-fit: contain;
     

@@ -29,30 +29,34 @@ export class PhotoStream extends React.Component {
     } = this.props;
 
     return (
-      <>
-        <InfiniteScroll
-          loadMore={() => fetchPhotos()}
-          hasMore={hasMore}
-          useWindow={false}
-          loader={<Loader />}
-        >
-          <StyledWrapper>
-            {chunk(photos, cardsInRow).map((row, i) => (
-              <StyledBlockWrapper key={i}>
-                  <StyledRow key={`stream-row-${i}`}>
-                    {row.map(p => (
-                      <Photo
-                        key={p.id}
-                        cardsInRow={cardsInRow}
-                        {...p}
-                      />
-                    ))}
-                  </StyledRow>
-              </StyledBlockWrapper>
-            ))}
-          </StyledWrapper>
-        </InfiniteScroll>
-      </>
+      <InfiniteScroll
+        loadMore={() => fetchPhotos()}
+        hasMore={hasMore}
+        loader={<Loader />}
+      >
+        <StyledWrapper>
+
+
+
+          {chunk(photos, cardsInRow).map((row, i) => (
+            <StyledBlockWrapper>
+          <Fade key={`fade-stream-row-${i}`} bottom>
+            <StyledRow key={`stream-row-${i}`}>
+              {row.map(p => (
+                <Photo
+                  key={`photo-${p.id}`}
+                  cardsInRow={cardsInRow}
+                  {...p}
+                />
+              ))}
+            </StyledRow>
+
+
+            </Fade>
+            </StyledBlockWrapper>
+          ))}
+        </StyledWrapper>
+      </InfiniteScroll>
     );
   }
 }

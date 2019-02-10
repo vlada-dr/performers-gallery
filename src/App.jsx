@@ -8,7 +8,6 @@ import Home from './router/Home';
 const Container = styled.div`
   width: 100vw;
   overflow-x: hidden;
-  height: 100%;
 `;
 
 const history = createBrowserHistory();

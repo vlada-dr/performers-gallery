@@ -14,11 +14,9 @@ export const globalStyles = css`
     background-attachment: fixed;
     color: #333;
     
-    @media (-webkit-min-device-pixel-ratio: 2), 
-    (min-resolution: 192dpi) { 
-      ${media.tab`
-        font-size: 32px;
-      `}
+    @media only screen and (max-device-width: 667px) 
+     and (-webkit-min-device-pixel-ratio: 2) { 
+      font-size: 32px;
     }
     
     ${media.pho`
