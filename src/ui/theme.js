@@ -13,6 +13,8 @@ export const globalStyles = css`
     background-color: #fff;
     background-attachment: fixed;
     color: #333;
+    width: 100%;
+    overflow-x: hidden;
     
     @media only screen and (max-device-width: 667px) 
      and (-webkit-min-device-pixel-ratio: 2) { 
