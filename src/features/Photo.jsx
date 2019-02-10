@@ -12,7 +12,7 @@ export class Photo extends React.Component {
 
   render() {
     const {
-      active, facesFound, photoUrl, setActive, id,
+      active, facesFound, photoUrl, setActive, id, cardsInRow,
     } = this.props;
 
     const { visible } = this.state;
@@ -30,7 +30,7 @@ export class Photo extends React.Component {
       <StyledPhoto
         active={active}
         onClick={() => facesFound.length && setActive(id)}
-        width={100 / 3}
+        width={100 / cardsInRow}
       >
         <StyledImageWrapper filter={visible !== null}>
           <img src={photoUrl} key={id} />
@@ -86,6 +86,10 @@ const StyledPhoto = styled.div`
   &:not(:last-child) {
     margin-right: 24px;
   }
+  
+  ${media.pho`
+    margin-left: 8px;
+  `}
 `;
 
 const StyledImageWrapper = styled.div`
@@ -109,10 +113,6 @@ const StyledImageWrapper = styled.div`
     opacity: ${p => (p.filter ? '0.5' : '0')};
     z-index: 0;
   }
-  
-  ${media.pho`
-    height: 145px;
-  `}
   
   img {
     object-fit: cover;
@@ -144,7 +144,7 @@ const StyledEmotions = styled.div`
   right: 8px;
   top: 8px;
   display: flex;
-  z-index: 3;
+  z-index: ${p => (p.visible ? '-1' : '3')};
   opacity: ${p => (p.visible ? '0' : '1')};
   transition: all ease-in-out .3s;
 `;

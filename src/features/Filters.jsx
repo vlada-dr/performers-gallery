@@ -8,7 +8,7 @@ export function Filters({ selectEmotion, selected }) {
   return (
     <StyledWrapper>
       {
-        chunk(Object.entries(EMOTIONS), 4).map((row, i) => (
+        chunk(Object.entries(EMOTIONS), 5).map((row, i) => (
           <div key={i}>
             {row.map(([emotion, data]) => (
               <Button

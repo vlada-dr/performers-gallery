@@ -7,6 +7,11 @@ import chunk from 'lodash/chunk';
 import { GalleryPhoto } from '../models';
 import { Loader } from '../ui';
 import { Photo } from './Photo';
+import { media } from '../ui/media';
+
+const { innerWidth } = window;
+
+const cardsInRow = innerWidth < 800 ? innerWidth < 400 ? 1 : 2 : 3;
 
 export class PhotoStream extends React.Component {
   static propTypes = {
@@ -41,7 +46,7 @@ export class PhotoStream extends React.Component {
           loader={<Loader />}
         >
           <StyledWrapper>
-            {chunk(photos, 3).map((row, i) => (
+            {chunk(photos, cardsInRow).map((row, i) => (
               <StyledBlockWrapper key={i}>
                 <Fade bottom cascade>
                   <StyledRow>
@@ -50,6 +55,7 @@ export class PhotoStream extends React.Component {
                         key={p.id}
                         active={p.id === active}
                         setActive={this.setActive}
+                        cardsInRow={cardsInRow}
                         {...p}
                       />
                     ))}
@@ -65,11 +71,19 @@ export class PhotoStream extends React.Component {
 }
 
 const StyledWrapper = styled.div`
-  max-width: 70vw;
+  max-width: 95vw;
   display: flex;
   flex-wrap: wrap;
   margin: auto;
   z-index: 1;
+  
+  ${media.tab`
+    max-width: 90vw;
+  `}
+  
+  ${media.desktop`
+    max-width: 70vw;
+  `}
 `;
 
 const StyledRow = styled.div`
