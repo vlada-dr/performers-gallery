@@ -17,22 +17,30 @@ export class Photo extends React.Component {
 
     const { visible } = this.state;
 
+    const visibleData = {};
+
+    if (visible !== null) {
+      const face = facesFound[visible];
+
+      visibleData.castEmotion = face.castEmotion.toLowerCase();
+      visibleData.emotion = face.emotion;
+    }
+
     return (
       <StyledPhoto
         active={active}
         onClick={() => facesFound.length && setActive(id)}
         width={100 / 3}
       >
-        <StyledImageWrapper>
+        <StyledImageWrapper filter={visible !== null}>
           <img src={photoUrl} key={id} />
-          <StyledEmotions>
+          <StyledEmotions visible={visible !== null}>
             {
               facesFound.map(({ castEmotion }, i) => (
                 <StyledSvg
                   key={i}
                   color={EMOTIONS[castEmotion.toLowerCase()].shadow}
-                  onMouseOver={() => this.setVisible(true)}
-                  onMouseOut={() => facesFound.length > 5 && i > 2 && this.setVisible(false)}
+                  onMouseOver={() => this.setVisible(i)}
                 >
                   {EMOTIONS[castEmotion.toLowerCase()].icon}
                 </StyledSvg>
@@ -40,18 +48,18 @@ export class Photo extends React.Component {
             }
           </StyledEmotions>
           <EmotionsList
-            visible={visible}
-            onMouseOut={() => this.setVisible(false)}
+            visible={visible !== null}
+            onMouseOut={() => this.setVisible(null)}
           >
             {
-              visible && facesFound.map(({ castEmotion, emotion, id }) => (
+              visible !== null && (
                 <div key={id}>
-                  {EMOTIONS[castEmotion.toLowerCase()].icon}
+                  {EMOTIONS[visibleData.castEmotion].icon}
                   <span>
-                    {emotion[castEmotion.toLowerCase()]}
+                    {Math.floor(visibleData.emotion[visibleData.castEmotion])}%
                   </span>
                 </div>
-              ))
+              )
             }
           </EmotionsList>
         </StyledImageWrapper>
@@ -87,7 +95,21 @@ const StyledImageWrapper = styled.div`
   margin: -1px 0 0 -1px;
   border-radius: 8px;
   overflow: hidden;
+  position: relative;
  
+  &:after {
+    transition: all ease-in-out .3s;
+    content: '';
+    width: calc(100% + 1px);
+    height: calc(100% + 1px);
+    position: absolute;
+    top: -1px;
+    left: -1px;
+    background: #fff;
+    opacity: ${p => (p.filter ? '0.5' : '0')};
+    z-index: 0;
+  }
+  
   ${media.pho`
     height: 145px;
   `}
@@ -122,6 +144,9 @@ const StyledEmotions = styled.div`
   right: 8px;
   top: 8px;
   display: flex;
+  z-index: 3;
+  opacity: ${p => (p.visible ? '0' : '1')};
+  transition: all ease-in-out .3s;
 `;
 
 const EmotionsList = styled.div`
@@ -138,6 +163,8 @@ const EmotionsList = styled.div`
   height: calc(100% + 1px);
   justify-content: center;
   padding: 4px ${p => (p.visible ? '8px' : '0px')};
+  opacity: 0.7;
+  z-index: 3;
   
   & > div {
     display: flex;
