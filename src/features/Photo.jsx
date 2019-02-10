@@ -31,12 +31,12 @@ export class Photo extends React.Component {
         onMouseOut={() => this.setVisible(false)}
       >
         <StyledImageWrapper filter={visible}>
-          <img src={photoUrl} key={id} />
+          <img src={photoUrl} />
           <StyledEmotions visible={visible}>
             {
               facesFound.map(({ castEmotion }, i) => (
                 <StyledSvg
-                  key={i}
+                  key={`face-found-${i}`}
                   color={EMOTIONS[castEmotion.toLowerCase()].shadow}
                 >
                   {EMOTIONS[castEmotion.toLowerCase()].icon}
@@ -51,13 +51,12 @@ export class Photo extends React.Component {
               visible && castEmotions.map(({ icon, value }) => (
                 <div key={id}>
                   {icon}
-                  <span>
                     {value}%
-                  </span>
                 </div>
               ))
             }
           </EmotionsList>
+          <OverflowWrapper filter={visible} />
         </StyledImageWrapper>
       </StyledPhoto>
     );
@@ -69,16 +68,15 @@ const StyledPhoto = styled.div`
   display: inline-flex;
   flex-direction: column;
   cursor: pointer;
+  z-index: 11;
   
   width: calc(${p => p.width}% - 16px);
   height: auto;
   border-radius: 8px;
-  box-shadow: 0 5px 5px 0 rgba(233,240,243,0.5), 0 0 0 1px #E6ECF8;
+  box-shadow: 0 8px 24px 0 rgba(0,0,0,.11);
   margin-bottom: 2px;
-  
-  ${p => p.active && css`
-    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.15);
-  `}
+  padding: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
   
   &:not(:last-child) {
     margin-right: 24px;
@@ -87,6 +85,18 @@ const StyledPhoto = styled.div`
   ${media.pho`
     margin-left: 8px;
   `}
+`;
+
+const OverflowWrapper = styled.div`
+  transition: all ease-in-out .3s;
+  content: '';
+  width: calc(100% + 1px);
+  height: calc(100% + 1px);
+  position: absolute;
+  top: -1px;
+  left: -1px;
+  background: #fff;
+  opacity: ${p => (p.filter ? '0.3' : '0')};
 `;
 
 const StyledImageWrapper = styled.div`
@@ -103,19 +113,6 @@ const StyledImageWrapper = styled.div`
     ${media.tab`
       height: 450px;
     `}
-  }
-  
-  &:after {
-    transition: all ease-in-out .3s;
-    content: '';
-    width: calc(100% + 1px);
-    height: calc(100% + 1px);
-    position: absolute;
-    top: -1px;
-    left: -1px;
-    background: #fff;
-    opacity: ${p => (p.filter ? '0.5' : '0')};
-    z-index: 0;
   }
   
   img {
@@ -161,25 +158,27 @@ const EmotionsList = styled.div`
   top: -1px;
   bottom: 0;
   border-radius: 0 8px 8px 0;
-  background: #8C43FF;
+  background: linear-gradient(60deg, rgba(161, 23, 230, .6) 0, rgba(23, 185, 230, .6) 100%) no-repeat scroll center center/cover;
   display: flex;
   flex-direction: column;
   height: calc(100% + 1px);
   justify-content: center;
   padding: 4px ${p => (p.visible ? '8px' : '0px')};
-  opacity: 0.6;
-  z-index: 3;
-  
+  z-index: 0;
+  opacity: ${p => (p.visible ? '0.6%' : '0')};
+  font-weight: bold;
+
   & > div {
     display: flex;
     align-items: center;
     color: white;
     padding: 4px 12px;
+    z-index: 0;
   }
   
   svg {
-    width: 20px;
-    height: 20px;
+    width: 30px;
+    height: 30px;
     fill: white;
     margin-right: 4px;
   }

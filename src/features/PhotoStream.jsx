@@ -48,7 +48,7 @@ export class PhotoStream extends React.Component {
             {chunk(photos, cardsInRow).map((row, i) => (
               <StyledBlockWrapper key={i}>
                 <Fade bottom cascade>
-                  <StyledRow>
+                  <StyledRow key={`stream-row-${i}`}>
                     {row.map(p => (
                       <Photo
                         key={p.id}
@@ -73,7 +73,7 @@ const StyledWrapper = styled.div`
   max-width: 95vw;
   display: flex;
   flex-wrap: wrap;
-  margin: auto;
+  margin: -200px auto 0;
   z-index: 1;
   
   ${media.tab`

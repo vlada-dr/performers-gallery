@@ -4,6 +4,7 @@ import { inject, observer } from 'mobx-react';
 import { Header } from '../ui';
 import { PhotoStream } from '../features/PhotoStream';
 import { Filters } from '../features/Filters';
+import { HomeHeader } from '../ui/icons';
 
 const Home = ({ photoStore }) => {
   return (
@@ -15,6 +16,7 @@ const Home = ({ photoStore }) => {
         selected={photoStore.emotion}
       />
       <HeaderBackground />
+      <StyledHomeHeader />
     </RelativeWrapper>
       <PhotoStream
         fetchPhotos={photoStore.fetch}
@@ -28,18 +30,27 @@ const Home = ({ photoStore }) => {
 
 export default inject('photoStore')(observer(Home));
 
+const StyledHomeHeader = styled(HomeHeader)`
+  position:fixed;
+  width: 105%;
+  left: -5%;
+  bottom: calc(50% - 2px);
+`;
+
 const HeaderBackground = styled.div`
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   right: 0;
-  background: #8C43FF;
-  height: calc(100% + 100px);
+  height: 50%;
   z-index: -1;
+  background: linear-gradient(60deg,#a117e6 0,#17b9e6 100%) no-repeat scroll center center/cover;
 `;
+
 
 const RelativeWrapper = styled.div`
   position: relative;
   z-index: 0;
   height: auto;
+  padding-bottom: 200px;
 `;

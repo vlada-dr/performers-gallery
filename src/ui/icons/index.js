@@ -6,3 +6,4 @@ export AngerIcon from './anger.svg';
 export DisgustIcon from './disgust.svg';
 export NeutralIcon from './neutral.svg';
 export SurpriseIcon from './surprise.svg';
+export HomeHeader from './home-header.svg';
