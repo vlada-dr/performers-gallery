@@ -2,12 +2,22 @@
 
 ## Installation
 
+Clone the repository
+
 ```
-1. yarn install
-2. yarn start
+git clone git@github.com:vlada-dr/performers-gallery.git
 ```
 
-Build project:
+Install all the dependencies using yarn
+```
+yarn install
+```
+
+Start project
+```
+yarn start
+```
+Build project
 
 ```
 yarn build
@@ -20,3 +30,8 @@ yarn build
 - Check code with ESLint.
 - Uses styled-components.
 - Supports hot-module-reload.
+
+# Additional Info
+
+> Hackathon int20h (Kyiv, UA) team: Performers.
+> Back-end part of task located [here](https://github.com/Nastya-Scherbakova/PerformersGallery) and developed by Scherbakova Nastya.
