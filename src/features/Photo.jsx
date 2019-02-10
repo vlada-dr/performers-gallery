@@ -100,7 +100,14 @@ const StyledImageWrapper = styled.div`
   border-radius: 8px;
   overflow: hidden;
   position: relative;
- 
+  
+  @media(-webkit-min-device-pixel-ratio: 2), 
+  (min-resolution: 192dpi) { 
+    ${media.tab`
+      height: 450px;
+    `}
+  }
+  
   &:after {
     transition: all ease-in-out .3s;
     content: '';

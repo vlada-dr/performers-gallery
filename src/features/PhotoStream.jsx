@@ -9,9 +9,8 @@ import { Loader } from '../ui';
 import { Photo } from './Photo';
 import { media } from '../ui/media';
 
-const { innerWidth } = window;
-
-const cardsInRow = innerWidth < 800 ? innerWidth < 400 ? 1 : 2 : 3;
+const { outerWidth } = window;
+const cardsInRow = outerWidth < 800 ? outerWidth < 400 ? 1 : 2 : 3;
 
 export class PhotoStream extends React.Component {
   static propTypes = {

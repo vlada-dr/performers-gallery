@@ -9,12 +9,16 @@ export const Loader = () => (
 );
 
 const Wrapper = styled.div`
-  margin: auto;
-  height: 40px;
-  padding: 40px;
+  margin: 60px auto;
+  height: 100px;
+  padding: 0 40px;
   background-position: center;
+  display: flex;
+  justify-content: center;
   
   svg {
-    height: 100%;
+    height: 200px;
+    z-index: 100;
+    margin-left: 100px;
   }
 `;
