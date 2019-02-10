@@ -31,7 +31,11 @@ class PhotoStore {
       this.photos = [];
     }
 
-    const parsedEmotion = emotion === 'No filters' ? null : capitalizeFirstLetter(this.emotion);
+    let parsedEmotion = capitalizeFirstLetter(this.emotion);
+
+    if (this.emotion === 'No filters') {
+      parsedEmotion = null;
+    }
 
     const { data } = await axios(`${API_URL}?${queryString({
       lastPhotoId: this.lastPhotoId,
